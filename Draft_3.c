@@ -1,6 +1,5 @@
-#this version implemented a placement function, as well as turn and observe. Modification to original source code by Tucker Hortman.
-using System;
-
+//this version implemented a placement function, as well as turn and observe. Modification to original source code by Tucker Hortman.
+//this version includes an attack function and truck functionality
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +11,13 @@ namespace Game
     class piece
     {
         public int Health = 1;
-        public int Atck = 1;
+        public int Attack = 1;
         public int side = 0;
-        int Type;
+        
+        public int Type;
 
+        public  piece[] cargo = new piece[5];
+        
         /* Types:
          * 0 = Grunt    1,1
          * 1 = Grunt    1,4
@@ -42,12 +44,13 @@ namespace Game
 
         public piece(int type)
         {
+            Random rand = new Random();
             this.ID = rand.Next(0,325);
             if(type == 1)
             {
                 this.Symbol = "G";
                 this.Health = 1;
-                this.Atck = 1;
+                this.Attack = 1;
                 this.Type = 1;
             }
 
@@ -55,7 +58,7 @@ namespace Game
             {
                 this.Symbol = "H";
                 this.Health = 4;
-                this.Atck = 1;
+                this.Attack = 1;
                 this.Type = 2;
             }
 
@@ -63,7 +66,7 @@ namespace Game
             {
                 this.Symbol = "S";
                 this.Health = 2;
-                this.Atck = 2;
+                this.Attack = 2;
                 this.Type = 3;
             }
 
@@ -71,7 +74,7 @@ namespace Game
             {
                 this.Symbol = "T";
                 this.Health = 2;
-                this.Atck = 2;
+                this.Attack = 2;
                 this.Type = 4;
                 piece[] carg = new piece[4];
             }
@@ -80,7 +83,7 @@ namespace Game
             {
                 this.Symbol = "q";
                 this.Health = 8;
-                this.Atck = 3;
+                this.Attack = 3;
                 this.Type = 5;
             }
 
@@ -88,7 +91,7 @@ namespace Game
             {
                 this.Symbol = "K";
                 this.Health = 1;
-                this.Atck = 1;
+                this.Attack = 1;
                 this.Type = 6;
             }
         }
@@ -560,7 +563,7 @@ namespace Game
                  if (map[y, x].getPiece() != null){
                     Console.WriteLine("There exists a piece on this tile of the type : "+ map[y, x].getPiece().getSymbol());
                     Console.WriteLine("Its health is : "+ map[y, x].getPiece().Health);
-                    Console.WriteLine("Its attack is : "+ map[y, x].getPiece().Atck);
+                    Console.WriteLine("Its attack is : "+ map[y, x].getPiece().Attack);
                     Console.WriteLine("Do you wish to move this unit? Y/N? ");
                     string input = Console.ReadLine();
                     if(input=="y"){
@@ -930,3 +933,4 @@ namespace Game
         }
     }
 }
+
